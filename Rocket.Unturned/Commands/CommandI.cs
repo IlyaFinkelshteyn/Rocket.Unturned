@@ -85,8 +85,8 @@ namespace Rocket.Unturned.Commands
             {
                 for(int i = 0; i < U.Settings.Instance.Items.Count; i++)
                 {
-                    Blacklist Item = U.Settings.Instance.Items[i];
-                    if(id == Item.id)
+                    ushort Item = U.Settings.Instance.Items[i];
+                    if(id == Item)
                     {
                         UnturnedChat.Say(player, U.Translate("command_i_blacklisted"));
                         return;
