@@ -44,18 +44,9 @@ namespace Rocket.Unturned.Commands
         public void Execute(IRocketPlayer caller, string[] command)
         {
             UnturnedPlayer player = (UnturnedPlayer)caller;
-            if (player.Features.VanishMode)
-            {
-                Logger.Log(U.Translate("command_vanish_disable_console", player.CharacterName));
-                UnturnedChat.Say(caller, U.Translate("command_vanish_disable_private"));
-                player.Features.VanishMode = false;
-            }
-            else
-            {
-                Logger.Log(U.Translate("command_vanish_enable_console", player.CharacterName));
-                UnturnedChat.Say(caller, U.Translate("command_vanish_enable_private"));
-                player.Features.VanishMode = true;
-            }
+            Logger.Log(U.Translate("command_vanish_toggle_console", player.CharacterName));
+            UnturnedChat.Say(player, U.Translate("command_vanish_toggle_private"));
+            player.Features.VanishMode = !player.Features.VanishMode;
         }
     }
 }

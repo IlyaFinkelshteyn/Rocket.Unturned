@@ -48,18 +48,9 @@ namespace Rocket.Unturned.Commands
         public void Execute(IRocketPlayer caller, string[] command)
         {
             UnturnedPlayer player = (UnturnedPlayer)caller;
-            if (player.Features.GodMode)
-            {
-                Logger.Log(U.Translate("command_god_disable_console", player.CharacterName));
-                UnturnedChat.Say(caller, U.Translate("command_god_disable_private"));
-                player.Features.GodMode = false;
-            }
-            else
-            {
-                Logger.Log(U.Translate("command_god_enable_console", player.CharacterName));
-                UnturnedChat.Say(caller, U.Translate("command_god_enable_private"));
-                player.Features.GodMode = true;
-            }
+            Logger.Log(U.Translate("command_god_toggle_console", player.CharacterName));
+            UnturnedChat.Say(player, U.Translate("command_god_toggle_console"));
+            player.Features.GodMode = !player.Features.GodMode;
         }
     }
 }
