@@ -444,6 +444,7 @@ namespace Rocket.Unturned.Player
                 player.life.channel.send("tellBroken", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, new object[] { value });
             }
         }
+
         public bool Bleeding
         {
             get
@@ -473,6 +474,14 @@ namespace Rocket.Unturned.Player
         public void Heal(byte amount, bool? bleeding, bool? broken)
         {
             player.life.askHeal(amount, bleeding != null ? bleeding.Value : player.life.isBleeding, broken != null ? broken.Value : player.life.isBroken);
+        }
+
+        public void Heal(byte amount, bool? bleeding, bool? broken, byte hunger, byte thirst, byte infection)
+        {
+            Heal(amount, bleeding, broken);
+            Hunger = hunger;
+            Thirst = thirst;
+            Infection = infection;
         }
 
         public void Suicide()

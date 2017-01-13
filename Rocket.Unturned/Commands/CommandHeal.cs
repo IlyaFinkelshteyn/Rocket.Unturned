@@ -49,12 +49,7 @@ namespace Rocket.Unturned.Commands
             if (caller is UnturnedPlayer && command.Length != 1)
             {
                 UnturnedPlayer player = (UnturnedPlayer)caller;
-                player.Heal(100);
-                player.Bleeding = false;
-                player.Broken = false;
-                player.Infection = 0;
-                player.Hunger = 0;
-                player.Thirst = 0;
+                player.Heal(100, false, false, 100, 100, 100);
                 UnturnedChat.Say(player, U.Translate("command_heal_success"));
             }
             else
@@ -62,12 +57,7 @@ namespace Rocket.Unturned.Commands
                 UnturnedPlayer otherPlayer = UnturnedPlayer.FromName(command[0]);
                 if (otherPlayer != null)
                 {
-                    otherPlayer.Heal(100);
-                    otherPlayer.Bleeding = false;
-                    otherPlayer.Broken = false;
-                    otherPlayer.Infection = 0;
-                    otherPlayer.Hunger = 0;
-                    otherPlayer.Thirst = 0;
+                    otherPlayer.Heal(100, false, false, 100, 100, 100);
                     UnturnedChat.Say(caller, U.Translate("command_heal_success_me", otherPlayer.CharacterName));
                     
                     if(caller != null)

@@ -86,7 +86,7 @@ namespace Rocket.Unturned.Items
             return new Item(itemId, amount, durability, (metadata == null ? new byte[0] : metadata));
         }
 
-        public static bool isBlacklisted(ushort id, UnturnedPlayer player)
+        public static bool isBlacklisted(ushort id)
         {
             for (int i = 0; i < U.Settings.Instance.Items.Count; i++)
             {
