@@ -65,14 +65,16 @@ namespace Rocket.Unturned.Commands
                 }
 
                 Asset[] assets = SDG.Unturned.Assets.find(EAssetType.VEHICLE);
-                foreach (VehicleAsset ia in assets)
+                for(int i = 0; i < assets.Length; i++)
                 {
+                    VehicleAsset ia = (VehicleAsset)assets[i];
                     if (ia != null && ia.vehicleName != null && ia.vehicleName.ToLower().Contains(itemString.ToLower()))
                     {
                         id = ia.id;
                         break;
                     }
                 }
+
                 if (!id.HasValue)
                 {
                     UnturnedChat.Say(caller, U.Translate("command_generic_invalid_parameter"));
