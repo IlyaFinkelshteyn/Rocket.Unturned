@@ -33,6 +33,7 @@ namespace Rocket.Unturned
         private static readonly TranslationList defaultTranslations = new TranslationList(){
             { "command_generic_failed_find_player","Failed to find player"},
                 { "command_generic_invalid_parameter","Invalid parameter"},
+                { "command_generic_invalid_syntax", "The correct syntax is: {0}" },
                 { "command_generic_target_player_not_found","Target player not found"},
                 { "command_generic_teleport_while_driving_error","You cannot teleport while driving or riding in a vehicle."},
                 { "command_god_enable_console","{0} enabled Godmode"},

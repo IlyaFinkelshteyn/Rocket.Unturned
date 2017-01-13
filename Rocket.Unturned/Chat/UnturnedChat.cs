@@ -79,10 +79,12 @@ namespace Rocket.Unturned.Chat
             byte b = (byte)(argb & 0xff);
             return GetColorFromRGB(r, g, b);
         }
+
 		public static Color GetColorFromRGB(byte R,byte G,byte B)
 		{
 			return GetColorFromRGB (R, G, B, 100);
 		}
+
         public static Color GetColorFromRGB(byte R,byte G,byte B,short A)
         {
             return new Color((1f / 255f) * R, (1f / 255f) * G, (1f / 255f) * B,(1f/100f) * A);
@@ -96,9 +98,11 @@ namespace Rocket.Unturned.Chat
         public static void Say(string message,Color color)
         {
             Core.Logging.Logger.Log("Broadcast: " + message, ConsoleColor.Gray);
-            foreach (string m in wrapMessage(message))
+            List<string> broadcast = wrapMessage(message);
+            for(int i = 0; i < broadcast.Count; i++)
             {
-                ChatManager.instance.channel.send("tellChat", ESteamCall.OTHERS, ESteamPacket.UPDATE_UNRELIABLE_BUFFER, new object[] { CSteamID.Nil, (byte)EChatMode.GLOBAL,color, m });
+                string m = broadcast[i];
+                ChatManager.instance.channel.send("tellChat", ESteamCall.OTHERS, ESteamPacket.UPDATE_UNRELIABLE_BUFFER, new object[] { CSteamID.Nil, (byte)EChatMode.GLOBAL, color, m });
             }
         }
        
