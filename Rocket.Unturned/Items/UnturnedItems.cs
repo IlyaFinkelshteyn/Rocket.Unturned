@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
 using SDG.Unturned;
+using Rocket.Unturned.Chat;
+using Rocket.Unturned.Player;
 
 namespace Rocket.Unturned.Items
 {
@@ -82,6 +84,17 @@ namespace Rocket.Unturned.Items
         public static Item AssembleItem(ushort itemId, byte amount = 1, byte durability = 100, byte[] metadata = null)
         {
             return new Item(itemId, amount, durability, (metadata == null ? new byte[0] : metadata));
+        }
+
+        public static bool isBlacklisted(ushort id, UnturnedPlayer player)
+        {
+            for (int i = 0; i < U.Settings.Instance.Items.Count; i++)
+            {
+                ushort Item = U.Settings.Instance.Items[i];
+                if (id == Item)
+                    return true;
+            }
+            return false;
         }
     }
 }
