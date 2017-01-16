@@ -48,8 +48,8 @@ namespace Rocket.Unturned.Commands
         public void Execute(IRocketPlayer caller, string[] command)
         {
             UnturnedPlayer player = (UnturnedPlayer)caller;
-            Logger.Log(U.Translate("command_god_toggle_console", player.CharacterName));
-            UnturnedChat.Say(player, U.Translate("command_god_toggle_console"));
+            Logger.Log(U.Translate("command_god_toggle", player.CharacterName, (player.Features.GodMode ? "off" : "on")));
+            UnturnedChat.Say(player, U.Translate("command_god_toggle", "You", (player.Features.GodMode ? "off" : "on")));
             player.Features.GodMode = !player.Features.GodMode;
         }
     }
