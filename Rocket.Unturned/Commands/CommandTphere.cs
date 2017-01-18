@@ -58,7 +58,10 @@ namespace Rocket.Unturned.Commands
             		UnturnedChat.Say(caller, U.Translate("command_tphere_vehicle"));
             		return;
             	}
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/RocketMod/master
                 otherPlayer.Teleport(player);
                 Logger.Log(U.Translate("command_tphere_teleport_console", otherPlayer.CharacterName, player.CharacterName));
                 UnturnedChat.Say(caller, U.Translate("command_tphere_teleport_from_private", otherPlayer.CharacterName));

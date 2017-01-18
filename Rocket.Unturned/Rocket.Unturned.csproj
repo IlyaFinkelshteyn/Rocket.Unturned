@@ -84,7 +84,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Commands\CommandBroadcastRaw.cs" />
+=======
+    <Compile Include="Commands\CommandMore.cs" />
+>>>>>>> refs/remotes/RocketMod/master
     <Compile Include="Commands\UnturnedCommands.cs" />
     <Compile Include="Commands\UnturnedCommandExtensions.cs" />
     <Compile Include="HUD.cs" />

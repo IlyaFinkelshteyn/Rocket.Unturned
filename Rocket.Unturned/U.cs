@@ -61,7 +61,11 @@ namespace Rocket.Unturned
                 { "command_tp_teleport_console","{0} teleported to {1}"},
                 { "command_tp_teleport_private","Teleported to {0}"},
                 { "command_tp_failed_find_destination","Failed to find destination"},
+<<<<<<< HEAD
                 { "command_tphere_vehicle", "The player you are trying to teleport is in a vehicle!"},
+=======
+                { "command_tphere_vehicle", "The player you are trying to teleport is in a vehicle"},
+>>>>>>> refs/remotes/RocketMod/master
                 { "command_tphere_teleport_console","{0} was teleported to {1}"},
                 { "command_tphere_teleport_from_private","Teleported {0} to you"},
                 { "command_tphere_teleport_to_private","You were teleported to {0}"},
@@ -102,6 +106,9 @@ namespace Rocket.Unturned
                 { "command_p_permissions_reload","Permissions reloaded"},
                 { "command_rocket_plugin_not_found","Plugin {0} not found"},
                 { "command_clear_success","You successfully cleared {0} items"},
+                { "command_more_usage", "Usage: /more <amount>" },
+                { "command_more_dequipped", "No item being held in hands." },
+                { "command_more_give", "Giving {0} of item: {1}." },
                 { "invalid_character_name","invalid character name"},
                 { "command_not_found","Command not found."}
         };
