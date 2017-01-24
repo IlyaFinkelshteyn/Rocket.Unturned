@@ -7,41 +7,20 @@ namespace Rocket.Unturned.Commands
 {
     public class CommandCompass : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Player;
-            }
-        }
+        #region Properties
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
-        public string Name
-        {
-            get { return "compass"; }
-        }
+        public string Name { get { return "compass"; } }
 
-        public string Help
-        {
-            get { return "Shows the direction you are facing"; }
-        }
+        public string Help { get { return "Shows the direction you are facing"; } }
 
-        public string Syntax
-        {
-            get { return "[direction]"; }
-        }
+        public string Syntax { get { return "[direction]"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
 
-        public List<string> Permissions
-        {
-            get
-            {
-                return new List<string>() { "rocket.compass" };
-            }
-        }
+        public List<string> Permissions { get { return new List<string>() { "rocket.compass" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -55,22 +34,26 @@ namespace Rocket.Unturned.Commands
                     case "north":
                         currentDirection = 0;
                         break;
+
                     case "east":
                         currentDirection = 90;
                         break;
+
                     case "south":
                         currentDirection = 180;
                         break;
+
                     case "west":
                         currentDirection = 270;
                         break;
+
                     default:
                         UnturnedChat.Say(caller, U.Translate("command_generic_invalid_parameter"));
                         throw new WrongUsageOfCommandException(caller, this);
                 }
                 player.Teleport(player.Position, currentDirection);
             }
-            
+
             string directionName = "Unknown";
 
             if (currentDirection > 30 && currentDirection < 60)

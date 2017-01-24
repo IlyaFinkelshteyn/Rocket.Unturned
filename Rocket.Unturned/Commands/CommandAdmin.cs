@@ -8,41 +8,20 @@ namespace Rocket.Unturned.Commands
 {
     public class CommandAdmin : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Both;
-            }
-        }
+        #region Properties
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Both; } }
 
-        public string Name
-        {
-            get { return "admin"; }
-        }
+        public string Name { get { return "admin"; } }
 
-        public string Help
-        {
-            get { return "Give a player admin privileges";}
-        }
+        public string Help { get { return "Give a player admin privileges"; } }
 
-        public string Syntax
-        {
-            get { return ""; }
-        }
+        public string Syntax { get { return ""; } }
 
-        public List<string> Permissions
-        {
-            get
-            {
-                return new List<string>() { "rocket.admin" };
-            }
-        }
+        public List<string> Permissions { get { return new List<string>() { "rocket.admin" }; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -52,15 +31,15 @@ namespace Rocket.Unturned.Commands
                 if (player == null)
                 {
                     UnturnedChat.Say(caller, U.Translate("command_generic_invalid_parameter"));
-                    throw new WrongUsageOfCommandException(caller,this);
+                    throw new WrongUsageOfCommandException(caller, this);
                 }
 
                 if (!player.IsAdmin)
                 {
-                    UnturnedChat.Say(caller, "Successfully admined "+player.CharacterName);
+                    UnturnedChat.Say(caller, "Successfully admined " + player.CharacterName);
                     player.Admin(true);
                 }
-            }   
+            }
         }
     }
 }

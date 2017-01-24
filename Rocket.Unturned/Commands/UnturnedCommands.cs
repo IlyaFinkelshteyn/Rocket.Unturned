@@ -1,15 +1,12 @@
-﻿using Rocket.Core;
-using Rocket.Core.Logging;
-using Rocket.Unturned.Events;
+﻿using Rocket.API;
+using Rocket.Core;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
 using Steamworks;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using Rocket.API;
-using Rocket.Core.Utils;
 
 namespace Rocket.Unturned.Commands
 {
@@ -17,7 +14,7 @@ namespace Rocket.Unturned.Commands
     {
         private void Awake()
         {
-            for(int i = 0; i < Commander.commands.Count; i++)
+            for (int i = 0; i < Commander.commands.Count; i++)
             {
                 Command vanillaCommand = Commander.commands[i];
                 R.Commands.Register(new UnturnedVanillaCommand(vanillaCommand), vanillaCommand.command.ToLower(), Core.Serialization.CommandPriority.Low);
@@ -37,7 +34,7 @@ namespace Rocket.Unturned.Commands
             {
                 get
                 {
-                   return new List<string>();
+                    return new List<string>();
                 }
             }
 
@@ -69,7 +66,7 @@ namespace Rocket.Unturned.Commands
             {
                 get
                 {
-                    return new List<string>() { "unturned."+command.command.ToLower() };
+                    return new List<string>() { "unturned." + command.command.ToLower() };
                 }
             }
 
@@ -77,23 +74,19 @@ namespace Rocket.Unturned.Commands
             {
                 get
                 {
-                    return command.info.Replace("/"," ");
+                    return command.info.Replace("/", " ");
                 }
             }
 
             public void Execute(IRocketPlayer caller, string[] command)
             {
                 CSteamID id = CSteamID.Nil;
-                if(caller is UnturnedPlayer)
+                if (caller is UnturnedPlayer)
                 {
                     id = ((UnturnedPlayer)caller).CSteamID;
                 }
-                Commander.commands.Where(c => c.command == Name).FirstOrDefault()?.check(id,Name, String.Join("/", command));
+                Commander.commands.Where(c => c.command == Name).FirstOrDefault()?.check(id, Name, String.Join("/", command));
             }
         }
-
-
-
-
     }
 }

@@ -8,38 +8,21 @@ namespace Rocket.Unturned.Commands
 {
     public class CommandVanish : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Player;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "vanish"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
-        public string Help
-        {
-            get { return "Are we rushing in or are we goin' sneaky beaky like?"; }
-        }
+        public string Name { get { return "vanish"; } }
 
-        public string Syntax
-        {
-            get { return ""; }
-        }
+        public string Help { get { return "Are we rushing in or are we goin' sneaky beaky like?"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public string Syntax { get { return ""; } }
 
-        public List<string> Permissions
-        {
-            get { return new List<string>() { "rocket.vanish" }; }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.vanish" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {

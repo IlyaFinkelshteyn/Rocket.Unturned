@@ -1,49 +1,28 @@
 ﻿using Rocket.API;
+using Rocket.API.Extensions;
+using Rocket.Unturned.Chat;
 using Rocket.Unturned.Player;
 using System.Collections.Generic;
-using System;
-using Rocket.Unturned.Chat;
-using Rocket.API.Extensions;
 
 namespace Rocket.Unturned.Commands
 {
     public class CommandEffect : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Player;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "effect"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
-        public string Help
-        {
-            get { return "Triggers an effect at your position";}
-        }
+        public string Name { get { return "effect"; } }
 
-        public string Syntax
-        {
-            get { return "<id>"; }
-        }
+        public string Help { get { return "Triggers an effect at your position"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public string Syntax { get { return "<id>"; } }
 
-        public List<string> Permissions
-        {
-            get
-            {
-                return new List<string>() { "rocket.effect" };
-            }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.effect" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {

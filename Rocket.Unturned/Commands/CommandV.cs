@@ -10,38 +10,21 @@ namespace Rocket.Unturned.Commands
 {
     public class CommandV : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Player;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "v"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
-        public string Help
-        {
-            get { return "Gives yourself an vehicle";}
-        }
+        public string Name { get { return "v"; } }
 
-        public string Syntax
-        {
-            get { return "<id>"; }
-        }
+        public string Help { get { return "Gives yourself an vehicle"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public string Syntax { get { return "<id>"; } }
 
-        public List<string> Permissions
-        {
-            get { return new List<string>() { "rocket.v", "rocket.vehicle" }; }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.v", "rocket.vehicle" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -65,7 +48,7 @@ namespace Rocket.Unturned.Commands
                 }
 
                 Asset[] assets = SDG.Unturned.Assets.find(EAssetType.VEHICLE);
-                for(int i = 0; i < assets.Length; i++)
+                for (int i = 0; i < assets.Length; i++)
                 {
                     VehicleAsset ia = (VehicleAsset)assets[i];
                     if (ia != null && ia.vehicleName != null && ia.vehicleName.ToLower().Contains(itemString.ToLower()))

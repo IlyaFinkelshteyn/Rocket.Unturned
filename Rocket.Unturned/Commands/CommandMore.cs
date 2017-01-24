@@ -2,44 +2,27 @@
 using Rocket.API.Extensions;
 using Rocket.Unturned.Chat;
 using Rocket.Unturned.Player;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Rocket.Unturned.Commands
 {
     public class CommandMore : IRocketCommand
     {
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        #region Properties
 
-        public AllowedCaller AllowedCaller
-        {
-            get { return AllowedCaller.Player; }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
 
-        public string Help
-        {
-            get { return "Gives more of an item that you have in your hands."; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
-        public string Name
-        {
-            get{ return "more"; }
-        }
+        public string Help { get { return "Gives more of an item that you have in your hands."; } }
 
-        public List<string> Permissions
-        {
-            get{ return new List<string>() { "rocket.more" }; }
-        }
+        public string Name { get { return "more"; } }
 
-        public string Syntax
-        {
-            get{ return "<amount>"; }
-        }
+        public List<string> Permissions { get { return new List<string>() { "rocket.more" }; } }
+
+        public string Syntax { get { return "<amount>"; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -55,12 +38,10 @@ namespace Rocket.Unturned.Commands
             if (itemId == 0)
             {
                 UnturnedChat.Say(caller, U.Translate("command_more_dequipped"));
+                return;
             }
-            else
-            {
-                UnturnedChat.Say(caller, U.Translate("command_more_give", amount, itemId));
-                player.GiveItem(itemId, (byte)amount);
-            }
+            UnturnedChat.Say(caller, U.Translate("command_more_give", amount, itemId));
+            player.GiveItem(itemId, (byte)amount);
         }
     }
 }

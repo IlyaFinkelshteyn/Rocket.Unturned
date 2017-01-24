@@ -1,49 +1,32 @@
-﻿using Rocket.Core.Logging;
+﻿using Rocket.API;
+using Rocket.Core.Logging;
+using Rocket.Unturned.Chat;
+using Rocket.Unturned.Items;
 using Rocket.Unturned.Player;
 using SDG.Unturned;
 using System;
 using System.Collections.Generic;
-using Rocket.API;
-using Rocket.Unturned.Chat;
-using Rocket.Unturned.Items;
 using System.Linq;
 
 namespace Rocket.Unturned.Commands
 {
     public class CommandI : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Player;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "i"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
-        public string Help
-        {
-            get { return "Gives yourself an item";}
-        }
+        public string Name { get { return "i"; } }
 
-        public string Syntax
-        {
-            get { return "<id> [amount]"; }
-        }
+        public string Help { get { return "Gives yourself an item"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>() { "item" }; }
-        }
+        public string Syntax { get { return "<id> [amount]"; } }
 
-        public List<string> Permissions
-        {
-            get { return new List<string>() { "rocket.item" , "rocket.i" }; }
-        }
+        public List<string> Aliases { get { return new List<string>() { "item" }; } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.item", "rocket.i" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -54,12 +37,11 @@ namespace Rocket.Unturned.Commands
                 throw new WrongUsageOfCommandException(caller, this);
             }
 
-            ushort id = 0;
             byte amount = 1;
 
             string itemString = command[0].ToString();
 
-            if (!ushort.TryParse(itemString, out id))
+            if (!ushort.TryParse(itemString, out ushort id))
             {
                 List<ItemAsset> sortedAssets = new List<ItemAsset>(SDG.Unturned.Assets.find(EAssetType.ITEM).Cast<ItemAsset>());
                 ItemAsset asset = sortedAssets.Where(i => i.itemName != null).OrderBy(i => i.itemName.Length).Where(i => i.itemName.ToLower().Contains(itemString.ToLower())).FirstOrDefault();
@@ -71,7 +53,7 @@ namespace Rocket.Unturned.Commands
                 }
             }
 
-            Asset a = SDG.Unturned.Assets.find(EAssetType.ITEM,id);
+            Asset a = SDG.Unturned.Assets.find(EAssetType.ITEM, id);
 
             if (command.Length == 2 && !byte.TryParse(command[1].ToString(), out amount) || a == null)
             {

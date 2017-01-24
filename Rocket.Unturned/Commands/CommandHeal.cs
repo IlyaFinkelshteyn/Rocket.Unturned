@@ -1,48 +1,27 @@
 ﻿using Rocket.API;
+using Rocket.Unturned.Chat;
 using Rocket.Unturned.Player;
 using System.Collections.Generic;
-using System;
-using Rocket.Unturned.Chat;
 
 namespace Rocket.Unturned.Commands
 {
     public class CommandHeal : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Both;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "heal"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Both; } }
 
-        public string Help
-        {
-            get { return "Heals yourself or somebody else";}
-        }
+        public string Name { get { return "heal"; } }
 
-        public string Syntax
-        {
-            get { return "[player]"; }
-        }
+        public string Help { get { return "Heals yourself or somebody else"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public string Syntax { get { return "[player]"; } }
 
-        public List<string> Permissions
-        {
-            get
-            {
-                return new List<string>() { "rocket.heal" };
-            }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.heal" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -59,8 +38,8 @@ namespace Rocket.Unturned.Commands
                 {
                     otherPlayer.Heal(100, false, false, 100, 100, 100);
                     UnturnedChat.Say(caller, U.Translate("command_heal_success_me", otherPlayer.CharacterName));
-                    
-                    if(caller != null)
+
+                    if (caller != null)
                         UnturnedChat.Say(otherPlayer, U.Translate("command_heal_success_other", caller.DisplayName));
                 }
                 else

@@ -1,6 +1,5 @@
 ﻿using Rocket.API;
 using Rocket.Core;
-using Rocket.Core.Plugins;
 using SDG.Unturned;
 using System;
 using System.Collections.Generic;
@@ -11,65 +10,48 @@ namespace Rocket.Unturned.Commands
 {
     public class CommandHelp : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Both;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "help"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Both; } }
 
-        public string Help
-        {
-            get { return "Shows you a specific help";}
-        }
+        public string Name { get { return "help"; } }
 
-        public string Syntax
-        {
-            get { return "[command]"; }
-        }
+        public string Help { get { return "Shows you a specific help"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public string Syntax { get { return "[command]"; } }
 
-        public List<string> Permissions
-        {
-                get { return new List<string>() { "rocket.help" }; }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.help" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
             if (command.Length == 0)
             {
-                System.Console.ForegroundColor = ConsoleColor.Cyan;
-                System.Console.WriteLine("[Vanilla]");
-                System.Console.ForegroundColor = ConsoleColor.White;
-                Commander.commands.OrderBy(c => c.command).All(c => { System.Console.WriteLine(c.command.ToLower().PadRight(20, ' ') + " " + c.info.Replace(c.command, "").TrimStart().ToLower()); return true; });
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("[Vanilla]");
+                Console.ForegroundColor = ConsoleColor.White;
+                Commander.commands.OrderBy(c => c.command).All(c => { Console.WriteLine(c.command.ToLower().PadRight(20, ' ') + " " + c.info.Replace(c.command, "").TrimStart().ToLower()); return true; });
 
-                System.Console.WriteLine();
+                Console.WriteLine();
 
-                System.Console.ForegroundColor = ConsoleColor.Cyan;
-                System.Console.WriteLine("[Rocket]");
-                System.Console.ForegroundColor = ConsoleColor.White;
-                R.Commands.Commands.Where(c => c.GetType().Assembly == Assembly.GetExecutingAssembly()).OrderBy(c => c.Name).All(c => { System.Console.WriteLine(c.Name.ToLower().PadRight(20, ' ') + " " + c.Syntax.ToLower()); return true; });
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("[Rocket]");
+                Console.ForegroundColor = ConsoleColor.White;
+                R.Commands.Commands.Where(c => c.GetType().Assembly == Assembly.GetExecutingAssembly()).OrderBy(c => c.Name).All(c => { Console.WriteLine(c.Name.ToLower().PadRight(20, ' ') + " " + c.Syntax.ToLower()); return true; });
 
-                System.Console.WriteLine();
-                
-                for(int i = 0; i < R.Plugins.GetPlugins().Count; i++)
+                Console.WriteLine();
+
+                for (int i = 0; i < R.Plugins.GetPlugins().Count; i++)
                 {
                     IRocketPlugin plugin = R.Plugins.GetPlugins()[i];
-                    System.Console.ForegroundColor = ConsoleColor.Cyan;
-                    System.Console.WriteLine("[" + plugin.GetType().Assembly.GetName().Name + "]");
-                    System.Console.ForegroundColor = ConsoleColor.White;
-                    R.Commands.Commands.Where(c => c.GetType().Assembly == plugin.GetType().Assembly).OrderBy(c => c.Name).All(c => { System.Console.WriteLine(c.Name.ToLower().PadRight(20, ' ') + " " + c.Syntax.ToLower()); return true; });
-                    System.Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("[" + plugin.GetType().Assembly.GetName().Name + "]");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    R.Commands.Commands.Where(c => c.GetType().Assembly == plugin.GetType().Assembly).OrderBy(c => c.Name).All(c => { Console.WriteLine(c.Name.ToLower().PadRight(20, ' ') + " " + c.Syntax.ToLower()); return true; });
+                    Console.WriteLine();
                 }
             }
             else
@@ -78,12 +60,12 @@ namespace Rocket.Unturned.Commands
                 if (cmd != null)
                 {
                     string commandName = cmd.GetType().Assembly.GetName().Name + " / " + cmd.Name;
-                   
-                    System.Console.ForegroundColor = ConsoleColor.Cyan;
-                    System.Console.WriteLine("[" + commandName + "]");
-                    System.Console.ForegroundColor = ConsoleColor.White;
-                    System.Console.WriteLine(cmd.Name + "\t\t" + cmd.Syntax);
-                    System.Console.WriteLine(cmd.Help);
+
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("[" + commandName + "]");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine(cmd.Name + "\t\t" + cmd.Syntax);
+                    Console.WriteLine(cmd.Help);
                 }
             }
         }

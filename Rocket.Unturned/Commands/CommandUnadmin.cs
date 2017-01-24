@@ -8,38 +8,21 @@ namespace Rocket.Unturned.Commands
 {
     public class CommandUnadmin : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Both;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "unadmin"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Both; } }
 
-        public string Help
-        {
-            get { return "Revoke a players admin privileges"; }
-        }
+        public string Name { get { return "unadmin"; } }
 
-        public string Syntax
-        {
-            get { return ""; }
-        }
+        public string Help { get { return "Revoke a players admin privileges"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public string Syntax { get { return ""; } }
 
-        public List<string> Permissions
-        {
-            get { return new List<string>() { "rocket.unadmin" }; }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.unadmin" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {

@@ -8,38 +8,21 @@ namespace Rocket.Unturned.Commands
 {
     internal class CommandTphere : IRocketCommand
     {
-        public AllowedCaller AllowedCaller
-        {
-            get
-            {
-                return AllowedCaller.Player;
-            }
-        }
+        #region Properties
 
-        public string Name
-        {
-            get { return "tphere"; }
-        }
+        public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
-        public string Help
-        {
-            get { return "Teleports another player to you";}
-        }
+        public string Name { get { return "tphere"; } }
 
-        public string Syntax
-        {
-            get { return "<player>"; }
-        }
+        public string Help { get { return "Teleports another player to you"; } }
 
-        public List<string> Aliases
-        {
-            get { return new List<string>(); }
-        }
+        public string Syntax { get { return "<player>"; } }
 
-        public List<string> Permissions
-        {
-            get { return new List<string>() { "rocket.tphere", "rocket.teleporthere" }; }
-        }
+        public List<string> Aliases { get { return new List<string>(); } }
+
+        public List<string> Permissions { get { return new List<string>() { "rocket.tphere", "rocket.teleporthere" }; } }
+
+        #endregion Properties
 
         public void Execute(IRocketPlayer caller, string[] command)
         {
@@ -51,13 +34,13 @@ namespace Rocket.Unturned.Commands
                 throw new WrongUsageOfCommandException(caller, this);
             }
             UnturnedPlayer otherPlayer = UnturnedPlayer.FromName(command[0]);
-            if (otherPlayer!=null && otherPlayer != caller)
+            if (otherPlayer != null && otherPlayer != caller)
             {
-            	if(otherPlayer.IsInVehicle)
-            	{
-            		UnturnedChat.Say(caller, U.Translate("command_tphere_vehicle"));
-            		return;
-            	}
+                if (otherPlayer.IsInVehicle)
+                {
+                    UnturnedChat.Say(caller, U.Translate("command_tphere_vehicle"));
+                    return;
+                }
                 otherPlayer.Teleport(player);
                 Logger.Log(U.Translate("command_tphere_teleport_console", otherPlayer.CharacterName, player.CharacterName));
                 UnturnedChat.Say(caller, U.Translate("command_tphere_teleport_from_private", otherPlayer.CharacterName));
