@@ -1,15 +1,16 @@
-﻿using System;
+﻿using SDG.Unturned;
+using System;
 using System.Linq;
-using SDG.Unturned;
-using Rocket.Unturned.Chat;
-using Rocket.Unturned.Player;
 
 namespace Rocket.Unturned.Items
 {
-    public class Attachment{
+    public class Attachment
+    {
         public ushort AttachmentId = 0;
         public byte Durability = 100;
-        public Attachment(ushort attachmentId, byte durability){
+
+        public Attachment(ushort attachmentId, byte durability)
+        {
             AttachmentId = attachmentId;
             Durability = durability;
         }
@@ -78,7 +79,7 @@ namespace Rocket.Unturned.Items
             metadata[11] = (byte)firemode;
             metadata[12] = (byte)1;
 
-            return AssembleItem(itemId,amount,durability,metadata);
+            return AssembleItem(itemId, amount, durability, metadata);
         }
 
         public static Item AssembleItem(ushort itemId, byte amount = 1, byte durability = 100, byte[] metadata = null)

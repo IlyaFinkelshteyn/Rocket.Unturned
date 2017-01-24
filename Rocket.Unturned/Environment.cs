@@ -6,6 +6,7 @@ namespace Rocket.Unturned
     public static class Environment
     {
         public static string RocketDirectory;
+
         public static void Initialize()
         {
             RocketDirectory = String.Format("Servers/{0}/Rocket/", U.Instance.InstanceId);

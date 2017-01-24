@@ -9,6 +9,7 @@ namespace Rocket.Unturned.Commands
     public class CommandAdmin : IRocketCommand
     {
         #region Properties
+
         public AllowedCaller AllowedCaller { get { return AllowedCaller.Both; } }
 
         public string Name { get { return "admin"; } }

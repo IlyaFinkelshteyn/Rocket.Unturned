@@ -1,7 +1,6 @@
 ﻿using Rocket.API;
 using Rocket.API.Serialisation;
 using Rocket.Core;
-using Rocket.Core.Logging;
 using Rocket.Unturned.Chat;
 using Rocket.Unturned.Extensions;
 using Rocket.Unturned.Player;
@@ -18,8 +17,9 @@ namespace Rocket.Unturned.Permissions
     public class UnturnedPermissions : MonoBehaviour
     {
         public delegate void JoinRequested(CSteamID player, ref ESteamRejection? rejectionReason);
+
         public static event JoinRequested OnJoinRequested;
-        
+
         [EditorBrowsable(EditorBrowsableState.Never)]
         internal static bool CheckPermissions(SteamPlayer caller, string permission)
         {
@@ -61,14 +61,14 @@ namespace Rocket.Unturned.Permissions
 
             try
             {
-                RocketPermissionsGroup g = R.Permissions.GetGroups(new Rocket.API.RocketPlayer(r.m_SteamID.ToString()),true).FirstOrDefault();
+                RocketPermissionsGroup g = R.Permissions.GetGroups(new Rocket.API.RocketPlayer(r.m_SteamID.ToString()), true).FirstOrDefault();
                 if (g != null)
                 {
                     SteamPending steamPending = Provider.pending.FirstOrDefault(x => x.playerID.steamID == r.m_SteamID);
                     if (steamPending != null)
                     {
-                        string prefix = g.Prefix == null ? "" : g.Prefix;
-                        string suffix = g.Suffix == null ? "" : g.Suffix;
+                        string prefix = g.Prefix ?? "";
+                        string suffix = g.Suffix ?? "";
                         if (prefix != "" && !steamPending.playerID.characterName.StartsWith(g.Prefix))
                         {
                             steamPending.playerID.characterName = prefix + steamPending.playerID.characterName;
@@ -79,11 +79,10 @@ namespace Rocket.Unturned.Permissions
                         }
                     }
                 }
-
             }
             catch (Exception ex)
             {
-                Core.Logging.Logger.Log("Failed adding prefix/suffix to player "+r.m_SteamID+": "+ex.ToString());
+                Core.Logging.Logger.Log("Failed adding prefix/suffix to player " + r.m_SteamID + ": " + ex.ToString());
             }
 
             if (OnJoinRequested != null)

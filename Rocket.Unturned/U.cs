@@ -4,11 +4,9 @@ using Rocket.API.Extensions;
 using Rocket.Core;
 using Rocket.Core.Assets;
 using Rocket.Core.Extensions;
-using Rocket.Core.Logging;
 using Rocket.Core.Plugins;
 using Rocket.Unturned.Chat;
 using Rocket.Unturned.Commands;
-using Rocket.Unturned.Effects;
 using Rocket.Unturned.Events;
 using Rocket.Unturned.Permissions;
 using Rocket.Unturned.Player;
@@ -27,7 +25,7 @@ namespace Rocket.Unturned
 {
     public class U : MonoBehaviour, IRocketImplementation, IModuleNexus
     {
-        private static GameObject rocketGameObject; 
+        private static GameObject rocketGameObject;
         public static U Instance;
 
         private static readonly TranslationList defaultTranslations = new TranslationList(){
@@ -109,7 +107,6 @@ namespace Rocket.Unturned
                 { "invalid_character_name","invalid character name"},
                 { "command_not_found","Command not found."}
         };
-         
 
         public static XMLFileAsset<UnturnedSettings> Settings;
         public static XMLFileAsset<TranslationList> Translation;
@@ -158,7 +155,7 @@ namespace Rocket.Unturned
                 };
             }
         }
-        
+
         private void Awake()
         {
             Instance = this;
@@ -209,11 +206,9 @@ namespace Rocket.Unturned
                         SteamGameServer.SetKeyValue("rocketplugins", String.Join(",", R.Plugins.GetPlugins().Select(p => p.Name).ToArray()));
                     };
 
-
                     SteamGameServer.SetKeyValue("unturned", Provider.APP_VERSION);
                     SteamGameServer.SetKeyValue("rocket", Assembly.GetExecutingAssembly().GetName().Version.ToString());
                     SteamGameServer.SetBotPlayerCount(1);
-
                 }
                 catch (Exception ex)
                 {
@@ -221,14 +216,13 @@ namespace Rocket.Unturned
                 }
 
                 OnRocketImplementationInitialized.TryInvoke();
-
             }
             catch (Exception ex)
             {
                 Core.Logging.Logger.LogException(ex);
             }
         }
-        
+
         private void bindDelegates()
         {
             CommandWindow.onCommandWindowInputted += (string text, ref bool shouldExecuteCommand) =>
@@ -273,7 +267,7 @@ namespace Rocket.Unturned
             {
                 isValid = UnturnedPermissions.CheckValid(callback);
             };
-    }
+        }
 
         public void Reload()
         {
@@ -288,7 +282,6 @@ namespace Rocket.Unturned
 
         public void Shutdown()
         {
-
         }
 
         public string InstanceId
@@ -296,8 +289,7 @@ namespace Rocket.Unturned
             get
             {
                 return Dedicator.serverID;
-            } 
+            }
         }
     }
-               
 }

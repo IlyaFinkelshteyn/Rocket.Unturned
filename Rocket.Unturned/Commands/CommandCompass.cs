@@ -8,6 +8,7 @@ namespace Rocket.Unturned.Commands
     public class CommandCompass : IRocketCommand
     {
         #region Properties
+
         public AllowedCaller AllowedCaller { get { return AllowedCaller.Player; } }
 
         public string Name { get { return "compass"; } }

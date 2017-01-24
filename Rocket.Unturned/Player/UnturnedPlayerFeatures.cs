@@ -1,5 +1,4 @@
-﻿using Rocket.API.Extensions;
-using Rocket.Unturned.Events;
+﻿using Rocket.Unturned.Events;
 using SDG.Unturned;
 using System;
 using UnityEngine;
@@ -8,18 +7,18 @@ namespace Rocket.Unturned.Player
 {
     public sealed class UnturnedPlayerFeatures : UnturnedPlayerComponent
     {
-
         public DateTime Joined = DateTime.Now;
 
         internal Color? color = null;
+
         internal Color? Color
         {
             get { return color; }
             set { color = value; }
         }
 
-
         private bool vanishMode = false;
+
         public bool VanishMode
         {
             get { return vanishMode; }
@@ -39,6 +38,7 @@ namespace Rocket.Unturned.Player
         }
 
         private bool godMode = false;
+
         public bool GodMode
         {
             set
@@ -67,7 +67,7 @@ namespace Rocket.Unturned.Player
 
         private bool initialCheck;
 
-        Vector3 oldPosition = new Vector3();
+        private Vector3 oldPosition = new Vector3();
 
         private void FixedUpdate()
         {
@@ -85,7 +85,7 @@ namespace Rocket.Unturned.Player
         private void Check()
         {
             initialCheck = true;
-           
+
             if (U.Settings.Instance.CharacterNameValidation)
             {
                 string username = Player.CharacterName;
@@ -107,7 +107,6 @@ namespace Rocket.Unturned.Player
 
         protected override void Load()
         {
-
             if (godMode)
             {
                 Player.Events.OnUpdateHealth += e_OnPlayerUpdateHealth;

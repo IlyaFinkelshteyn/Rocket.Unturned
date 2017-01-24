@@ -12,6 +12,7 @@ namespace Rocket.Unturned.Effects
             this.EffectID = effectID;
             this.Global = global;
         }
+
         public string Type;
         public ushort EffectID;
         public bool Global;

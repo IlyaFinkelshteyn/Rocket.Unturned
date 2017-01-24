@@ -1,10 +1,6 @@
 ﻿using Rocket.API;
-using Rocket.API.Extensions;
-using Rocket.Core.Logging;
 using Rocket.Core.Utils;
-using Rocket.Unturned.Events;
 using Rocket.Unturned.Player;
-using SDG.Unturned;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +13,7 @@ namespace Rocket.Unturned.Plugins
     {
         private Assembly assembly;
         private List<Type> unturnedPlayerComponents = new List<Type>();
-        
+
         private void OnDisable()
         {
             try
@@ -40,14 +36,14 @@ namespace Rocket.Unturned.Plugins
         private void OnEnable()
         {
             try
-            {  
+            {
                 IRocketPlugin plugin = GetComponent<IRocketPlugin>();
                 assembly = plugin.GetType().Assembly;
 
                 U.Events.OnBeforePlayerConnected += addPlayerComponents;
                 unturnedPlayerComponents.AddRange(RocketHelper.GetTypesFromParentClass(assembly, typeof(UnturnedPlayerComponent)));
 
-                for(int i = 0; i < unturnedPlayerComponents.Count; i++)
+                for (int i = 0; i < unturnedPlayerComponents.Count; i++)
                 {
                     Type playerComponent = unturnedPlayerComponents[i];
                     Core.Logging.Logger.Log("Adding UnturnedPlayerComponent: " + playerComponent.Name);
@@ -62,7 +58,7 @@ namespace Rocket.Unturned.Plugins
 
         private void addPlayerComponents(IRocketPlayer p)
         {
-            for(int i = 0; i < unturnedPlayerComponents.Count; i++)
+            for (int i = 0; i < unturnedPlayerComponents.Count; i++)
             {
                 Type component = unturnedPlayerComponents[i];
                 ((UnturnedPlayer)p).Player.gameObject.AddComponent(component);

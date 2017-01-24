@@ -1,15 +1,12 @@
-﻿using Rocket.Unturned.Player;
-using SDG.Unturned;
+﻿using SDG.Unturned;
 using Steamworks;
-using System;
 using UnityEngine;
-
 
 namespace Rocket.Unturned
 {
     public class HUD : PlayerCaller
     {
-        bool visible = false;
+        private bool visible = false;
 
         private void Start()
         {
@@ -18,7 +15,7 @@ namespace Rocket.Unturned
         }
 
         public void askToggleHud(bool visible)
-        {     
+        {
             base.channel.send("tellToggleHud", ESteamCall.OWNER, ESteamPacket.UPDATE_RELIABLE_BUFFER, true);
         }
 
@@ -38,7 +35,6 @@ namespace Rocket.Unturned
             GUI.Label(new Rect(20, 110, 130, 20), "HUD enabled");
             if (visible)
                 GUI.Label(new Rect(20, 210, 130, 20), "HUD visible");
-
         }
     }
 }

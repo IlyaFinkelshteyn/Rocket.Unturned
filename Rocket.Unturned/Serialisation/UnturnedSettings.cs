@@ -1,8 +1,6 @@
 ﻿using Rocket.API;
-using System.Xml.Serialization;
-using Rocket.Unturned.Items;
 using System.Collections.Generic;
-using System;
+using System.Xml.Serialization;
 
 namespace Rocket.Unturned.Serialisation
 {
@@ -55,7 +53,7 @@ namespace Rocket.Unturned.Serialisation
 
         public int MaxSpawnAmount;
 
-    public void LoadDefaults()
+        public void LoadDefaults()
         {
             AutomaticSave = new AutomaticSaveSettings();
             RocketModObservatory = new RocketModObservatorySettings();
